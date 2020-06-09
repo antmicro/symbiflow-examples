@@ -48,8 +48,7 @@ INSTALL_DIR=/opt/symbiflow/eos-s3
 bash miniconda.sh -b -p $INSTALL_DIR/miniconda && rm miniconda.sh
 source "$INSTALL_DIR/miniconda/etc/profile.d/conda.sh"
 conda update -y -q conda
-
-tar -xf arch-defs-install.tar.xz -C $INSTALL_DIR
+wget -qO- https://storage.googleapis.com/symbiflow-arch-defs-install/quicklogic/arch-defs-install-eos-s3-f7880e1f.tar.xz | tar -xJ -C $INSTALL_DIR
 conda install -y -c antmicro/label/ql yosys yosys-plugins vtr-no-gui
 conda install -y make lxml simplejson intervaltree git pip
 conda activate
