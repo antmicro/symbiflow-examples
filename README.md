@@ -24,7 +24,7 @@ This section describes how to install the toolchain. This procedure is divided i
 1. Conda
 
 ```bash
-wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O conda_installer.sh
 ```
 
 2. Toolchain
@@ -32,8 +32,8 @@ wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O mi
 For the Artix-7 devices:
 
 ```bash
-INSTALL_DIR=/opt/symbiflow/xc7
-bash miniconda.sh -b -p $INSTALL_DIR/conda && rm miniconda.sh
+INSTALL_DIR="/opt/symbiflow/xc7"
+bash conda_installer.sh -b -p $INSTALL_DIR/conda && rm conda_installer.sh
 source $INSTALL_DIR/conda/etc/profile.d/conda.sh
 conda update -y -q conda
 
@@ -49,7 +49,7 @@ conda deactivate
 For the EOS S3 devices:
 
 ```bash
-INSTALL_DIR=/opt/symbiflow/eos-s3
+INSTALL_DIR="/opt/symbiflow/eos-s3"
 bash conda_installer.sh -b -p $INSTALL_DIR/conda && rm conda_installer.sh
 source "$INSTALL_DIR/conda/etc/profile.d/conda.sh"
 conda update -y -q conda
@@ -85,9 +85,9 @@ The `linux_litex` example is already provided with working Linux images.
 To build the examples, run the following commands:
 
 ```bash
-export INSTALL_DIR=/opt/symbiflow/xc7
+export INSTALL_DIR="/opt/symbiflow/xc7"
 # adding symbiflow toolchain binaries to PATH
-export PATH=$INSTALL_DIR/install/bin:$PATH
+export PATH="$INSTALL_DIR/install/bin:$PATH"
 source "$INSTALL_DIR/conda/etc/profile.d/conda.sh"
 conda activate
 git clone https://github.com/SymbiFlow/symbiflow-examples && cd symbiflow-examples
@@ -106,9 +106,9 @@ pushd examples/xc7/linux_litex_demo && make && popd
 To build the example, run the following commands:
 
 ```bash
-export INSTALL_DIR=/opt/symbiflow/quicklogic
+export INSTALL_DIR="/opt/symbiflow/quicklogic"
 # adding symbiflow toolchain binaries to PATH
-export PATH=$INSTALL_DIR/install/bin:$PATH
+export PATH="$INSTALL_DIR/install/bin:$PATH"
 source "$INSTALL_DIR/conda/etc/profile.d/conda.sh"
 conda activate
 git clone https://github.com/SymbiFlow/symbiflow-examples && cd symbiflow-examples
