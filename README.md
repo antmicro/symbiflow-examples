@@ -111,7 +111,7 @@ pushd examples/xc7/linux_litex_demo && make && popd
 To build the example, run following commands:
 
 ```bash
-export INSTALL_DIR=/opt/symbiflow/quicklogic
+export INSTALL_DIR=/opt/symbiflow/eos-s3
 # adding symbiflow toolchain binaries to PATH
 export PATH=$INSTALL_DIR/install/bin:$PATH
 source "$INSTALL_DIR/miniconda/etc/profile.d/conda.sh"
