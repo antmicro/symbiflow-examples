@@ -5,27 +5,22 @@ The examples target the Xilinx Artix-7 and the QuickLogic EOS S3 devices.
 
 The repository includes:
 
-* Travis CI configuration file
-* Build scripts to generate the environment:
-
-  * Conda configurations
-  * Python requirements
-  * Environment setup
-
-* Example FPGA designs including:
+* [examples](./examples) - Example FPGA designs including:
 
   * Verilog code
   * Pin constraints files
   * Timing constraints files
   * Makefiles for running the SymbiFlow toolchain
 
-## Description
+* [.travis.yml](.travis.yml) Travis CI configuration file
 
-Travis-based CI in this repository runs all the steps required to build the example designs and generate bitstreams for programming the FPGA devices.
+## CI
+
+The Travis-based CI in this repository runs all the steps required to build the example designs and generate bitstreams for programming the FPGA devices.
 
 The CI performs the following steps:
 
-* [Miniconda](https://docs.conda.io/en/latest/miniconda.html) installation and configuration
+* Installation and configuration of [Miniconda](https://docs.conda.io/en/latest/miniconda.html) 
 * Installation of the required conda packages (toolchains and Python modules). Note that Python packages can be installed using any Python package manager:
 
     * [VTR](https://anaconda.org/symbiflow/vtr)
@@ -35,7 +30,7 @@ The CI performs the following steps:
 
 ## Toolchain installation
 
-This block of code regards the toolchain installation. It is divided in three main steps:
+This section describes how to install the toolchain. This procedure is divided in three main steps:
 
 - Conda setup
 - Conda packages installation
@@ -127,3 +122,4 @@ conda activate
 git clone https://github.com/SymbiFlow/symbiflow-examples && cd symbiflow-examples
 pushd examples/eos-s3 && make && popd
 ```
+
