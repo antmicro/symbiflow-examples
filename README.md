@@ -22,7 +22,7 @@ This section describes how to install the toolchain. This procedure is divided i
 - Install the Conda package manager and basic Conda dependencies
 - Install the toolchain
 
-### Setup installation directory
+### Setup installation directory and download architecture definitions
 
 For Artix 7, run:
 
@@ -38,7 +38,7 @@ INSTALL_DIR=/opt/symbiflow/eos-s3
 wget -qO- https://storage.googleapis.com/symbiflow-arch-defs-install/quicklogic/arch-defs-install-eos-s3-f7880e1f.tar.xz | tar -xJ -C $INSTALL_DIR
 ```
 
-### Install Conda and basic dependencies
+### Install Conda and common dependencies
 
 ```bash
 wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
@@ -48,15 +48,14 @@ conda update -y -q conda
 conda install -y make lxml simplejson intervaltree git pip yosys yosys-plugins vtr-no-gui
 ```
 
-### Install the toolchain
+### Install platform-specific dependencies
 
 For the Artix-7 devices:
 
 ```bash
 conda install -y -c symbiflow
 conda activate
-pip install python-constraint
-pip install git+https://github.com/symbiflow/fasm
+pip install python-constraint git+https://github.com/symbiflow/fasm
 conda deactivate
 ```
 
@@ -65,8 +64,7 @@ For the EOS S3 devices:
 ```bash
 conda install -y -c antmicro/label/ql 
 conda activate
-pip install python-constraint
-pip install git+https://github.com/symbiflow/fasm
+pip install python-constraint git+https://github.com/symbiflow/fasm
 pip install git+https://github.com/antmicro/quicklogic-fasm
 pip install git+https://github.com/antmicro/quicklogic-fasm-utils
 conda deactivate
