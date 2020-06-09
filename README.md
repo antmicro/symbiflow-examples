@@ -16,41 +16,54 @@ The repository includes:
 
 ## Toolchain installation
 
-This section describes how to install the toolchain. This procedure is divided in two steps:
+This section describes how to install the toolchain. This procedure is divided in three steps:
 
-- Installing the Conda package manager
-- Downloading the architecture definition and installing the toolchain
+- Setup installation directory and download architecture definitions
+- Install the Conda package manager and basic Conda dependencies
+- Install the toolchain
 
-1. Conda installation:
-```bash
-wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-```
+### Setup installation directory
 
-1. Toolchain for the Artix-7 devices:
+For Xilinx, run:
+
 ```bash
 INSTALL_DIR=/opt/symbiflow/xc7
+wget -qO- https://storage.googleapis.com/symbiflow-arch-defs/artifacts/prod/foss-fpga-tools/symbiflow-arch-defs/continuous/install/4/20200416-002215/symbiflow-arch-defs-install-a321d9d9.tar.xz | tar -xJ -C $INSTALL_DIR
+```
+
+For EOS S3:
+
+```bash
+INSTALL_DIR=/opt/symbiflow/eos-s3
+wget -qO- https://storage.googleapis.com/symbiflow-arch-defs-install/quicklogic/arch-defs-install-eos-s3-f7880e1f.tar.xz | tar -xJ -C $INSTALL_DIR
+```
+
+### Install Conda and basic dependencies
+
+```bash
+wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
 bash miniconda.sh -b -p $INSTALL_DIR/miniconda && rm miniconda.sh
 source $INSTALL_DIR/miniconda/etc/profile.d/conda.sh
 conda update -y -q conda
+conda install -y make lxml simplejson intervaltree git pip yosys yosys-plugins vtr-no-gui
+```
 
-wget -qO- https://storage.googleapis.com/symbiflow-arch-defs/artifacts/prod/foss-fpga-tools/symbiflow-arch-defs/continuous/install/4/20200416-002215/symbiflow-arch-defs-install-a321d9d9.tar.xz | tar -xJ -C $INSTALL_DIR
-conda install -y -c symbiflow yosys yosys-plugins vtr-no-gui
-conda install -y make lxml simplejson intervaltree git pip
+### Install the toolchain
+
+For the Artix-7 devices:
+
+```bash
+conda install -y -c symbiflow
 conda activate
 pip install python-constraint
 pip install git+https://github.com/symbiflow/fasm
 conda deactivate
 ```
 
-2. Toolchain for the EOS S3 devices:
+For the EOS S3 devices:
+
 ```bash
-INSTALL_DIR=/opt/symbiflow/eos-s3
-bash miniconda.sh -b -p $INSTALL_DIR/miniconda && rm miniconda.sh
-source "$INSTALL_DIR/miniconda/etc/profile.d/conda.sh"
-conda update -y -q conda
-wget -qO- https://storage.googleapis.com/symbiflow-arch-defs-install/quicklogic/arch-defs-install-eos-s3-f7880e1f.tar.xz | tar -xJ -C $INSTALL_DIR
-conda install -y -c antmicro/label/ql yosys yosys-plugins vtr-no-gui
-conda install -y make lxml simplejson intervaltree git pip
+conda install -y -c antmicro/label/ql 
 conda activate
 pip install python-constraint
 pip install git+https://github.com/symbiflow/fasm
