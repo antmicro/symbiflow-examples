@@ -68,4 +68,4 @@ jobs:
         - tar -xf arch-defs-install.tar.xz -C $INSTALL_DIR
         - export PATH=$INSTALL_DIR/install/bin:$PATH
         - conda activate
-        - pushd quicklogic_demo && make && popd
+        - pushd quicklogic && make && popd

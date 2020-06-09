@@ -83,7 +83,7 @@ With the toolchain installed, you can build the example designs.
 The example designs are provided in separate directories:
 
 * `xc7` directory for the Artix-7 devices
-* `quicklogic_demo` directory for the EOS S3 devices
+* `quicklogic` directory for the EOS S3 devices
 
 ### The example designs for the Artix-7 devices:
 
@@ -126,5 +126,5 @@ tar -xf ./arch-defs-install.tar.xz -C $INSTALL_DIR
 export PATH=$INSTALL_DIR/install/bin:$PATH
 conda activate
 # counter example
-pushd quicklogic_demo && make && popd
+pushd quicklogic && make && popd
 ```
