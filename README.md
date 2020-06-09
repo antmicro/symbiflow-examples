@@ -12,29 +12,14 @@ The repository includes:
   * Timing constraints files
   * Makefiles for running the SymbiFlow toolchain
 
-* [.travis.yml](.travis.yml) Travis CI configuration file
-
-## CI
-
-The Travis-based CI in this repository runs all the steps required to build the example designs and generate bitstreams for programming the FPGA devices.
-
-The CI performs the following steps:
-
-* Installation and configuration of [Miniconda](https://docs.conda.io/en/latest/miniconda.html) 
-* Installation of the required conda packages (toolchains and Python modules). Note that Python packages can be installed using any Python package manager:
-
-    * [VTR](https://anaconda.org/symbiflow/vtr)
-    * [Yosys](https://anaconda.org/symbiflow/yosys)
-    * [Yosys-plugins](https://anaconda.org/symbiflow/yosys-plugins)
-    * [lxml](https://anaconda.org/conda-forge/lxml), [simplejson](https://anaconda.org/conda-forge/simplejson), [intervaltree](https://anaconda.org/conda-forge/intervaltree), [python-constraint](https://anaconda.org/conda-forge/python-constraint), [git](https://anaconda.org/conda-forge/git), [pip](https://anaconda.org/conda-forge/pip), [fasm](https://github.com/SymbiFlow/fasm), [quicklogic-fasm](https://github.com/antmicro/quicklogic-fasm) and [quicklogic-fasm-utils](https://github.com/antmicro/quicklogic-fasm-utils)
+* [.travis.yml](.travis.yml) - Travis CI configuration file
 
 ## Toolchain installation
 
-This section describes how to install the toolchain. This procedure is divided in three main steps:
+This section describes how to install the toolchain. This procedure is divided in two steps:
 
-- Conda setup
-- Conda packages installation
-- Architecture definitions installation
+- Installing the Conda package manager
+- Downloading the architecture definition and installing the toolchain
 
 1. Conda installation:
 ```bash
@@ -47,6 +32,7 @@ INSTALL_DIR=/opt/symbiflow/xc7
 bash Miniconda3-latest-Linux-x86_64.sh -b -p $INSTALL_DIR/conda && rm Miniconda3-latest-Linux-x86_64.sh
 source $INSTALL_DIR/conda/etc/profile.d/conda.sh
 conda update -y -q conda
+
 wget -qO- https://storage.googleapis.com/symbiflow-arch-defs/artifacts/prod/foss-fpga-tools/symbiflow-arch-defs/continuous/install/4/20200416-002215/symbiflow-arch-defs-install-a321d9d9.tar.xz | tar -xJ -C $INSTALL_DIR
 conda install -y -c symbiflow yosys yosys-plugins vtr-no-gui
 conda install -y make lxml simplejson intervaltree git pip
@@ -62,6 +48,7 @@ INSTALL_DIR=/opt/symbiflow/eos-s3
 bash miniconda.sh -b -p $INSTALL_DIR/miniconda && rm miniconda.sh
 source "$INSTALL_DIR/miniconda/etc/profile.d/conda.sh"
 conda update -y -q conda
+
 tar -xf arch-defs-install.tar.xz -C $INSTALL_DIR
 conda install -y -c antmicro/label/ql yosys yosys-plugins vtr-no-gui
 conda install -y make lxml simplejson intervaltree git pip
@@ -122,4 +109,3 @@ conda activate
 git clone https://github.com/SymbiFlow/symbiflow-examples && cd symbiflow-examples
 pushd examples/eos-s3 && make && popd
 ```
-
