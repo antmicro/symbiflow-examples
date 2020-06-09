@@ -45,15 +45,16 @@ wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O co
 bash conda_installer.sh -b -p $INSTALL_DIR/conda && rm conda_installer.sh
 source $INSTALL_DIR/conda/etc/profile.d/conda.sh
 conda update -y -q conda
-conda install -y make lxml simplejson intervaltree git pip yosys yosys-plugins vtr-no-gui
+conda install -y make lxml simplejson intervaltree git pip
 ```
 
-### Install platform-specific dependencies
+### Install toolchain
 
 For the Artix-7 devices:
 
 ```bash
 conda install -y -c symbiflow
+conda install yosys yosys-plugins vtr-no-gui
 conda activate
 pip install python-constraint git+https://github.com/symbiflow/fasm
 conda deactivate
@@ -62,7 +63,8 @@ conda deactivate
 For the EOS S3 devices:
 
 ```bash
-conda install -y -c antmicro/label/ql 
+conda install -y -c antmicro/label/ql
+conda install yosys yosys-plugins vtr-no-gui
 conda activate
 pip install python-constraint git+https://github.com/symbiflow/fasm
 pip install git+https://github.com/antmicro/quicklogic-fasm
