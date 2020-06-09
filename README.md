@@ -7,6 +7,7 @@ The repository includes:
 
 * Travis CI configuration file
 * Build scripts to generate the environment:
+
   * Conda configurations
   * Python requirements
   * Environment setup
@@ -40,10 +41,15 @@ This block of code regards the toolchain installation. It is divided in three ma
 - Conda packages installation
 - Architecture definitions installation
 
+1. Conda installation:
+```bash
+wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+```
+
+
 1. Toolchain for the Artix-7 devices:
 ```bash
 INSTALL_DIR=/opt/symbiflow/xc7
-wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh -b -p $INSTALL_DIR/conda && rm Miniconda3-latest-Linux-x86_64.sh
 source $INSTALL_DIR/conda/etc/profile.d/conda.sh
 conda update -y -q conda
@@ -59,18 +65,14 @@ conda deactivate
 2. Toolchain for the EOS S3 devices:
 ```bash
 INSTALL_DIR=/opt/symbiflow/quicklogic
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
 bash miniconda.sh -b -p $INSTALL_DIR/miniconda && rm miniconda.sh
 source "$INSTALL_DIR/miniconda/etc/profile.d/conda.sh"
-conda config --set always_yes yes --set changeps1 no
-conda update -q conda
-conda config --add channels conda-forge
-conda config --add channels antmicro/label/ql
+conda update -y -q conda
+tar -xf arch-defs-install.tar.xz -C $INSTALL_DIR
+conda install -y -c antmicro/label/ql yosys yosys-plugins vtr-no-gui
+conda install -y make lxml simplejson intervaltree git pip
 conda activate
-conda install -c antmicro/label/ql yosys
-conda install -c antmicro/label/ql yosys-plugins
-conda install -c antmicro/label/ql vtr
-conda install lxml simplejson intervaltree python-constraint git pip
+pip install python-constraint
 pip install git+https://github.com/symbiflow/fasm
 pip install git+https://github.com/antmicro/quicklogic-fasm
 pip install git+https://github.com/antmicro/quicklogic-fasm-utils
@@ -82,10 +84,10 @@ conda deactivate
 With the toolchain installed, you can build the example designs.
 The example designs are provided in separate directories:
 
-* `xc7` directory for the Artix-7 devices
-* `quicklogic` directory for the EOS S3 devices
+* `examples/xc7` directory for the Artix-7 devices
+* `examples/eos-s3` directory for the EOS S3 devices
 
-### The example designs for the Artix-7 devices:
+### Example designs for the Artix-7 devices:
 
 1. `counter` - simple 4-bit counter driving LEDs. The design targets the [Basys3 board](https://store.digilentinc.com/basys-3-artix-7-fpga-trainer-board-recommended-for-introductory-users/) and the [Arty board](https://store.digilentinc.com/arty-a7-artix-7-fpga-development-board-for-makers-and-hobbyists/).
 1. `picosoc` - [picorv32](https://github.com/cliffordwolf/picorv32) based SoC. The design targets the [Basys3 board](https://store.digilentinc.com/basys-3-artix-7-fpga-trainer-board-recommended-for-introductory-users/).
@@ -111,20 +113,16 @@ pushd picosoc_demo && make && popd
 pushd linux_litex_demo && make && popd
 ```
 
-### The example design for the EOS S3 devices:
+### Example design for the EOS S3 devices:
 
-1. `btn_counter` - simple 4-bit counter driving LEDs. The design targets the [EOS S3 board](https://www.quicklogic.com/products/eos-s3/).
+1. `btn_counter` - simple 4-bit counter driving LEDs. The design targets the [EOS S3 FPGA](https://www.quicklogic.com/products/eos-s3/).
 
 To build the example, run following commands:
 
 ```bash
 INSTALL_DIR=/opt/symbiflow/quicklogic
 source "$INSTALL_DIR/miniconda/etc/profile.d/conda.sh"
-git clone https://github.com/SymbiFlow/symbiflow-examples && cd symbiflow-examples
-tar -xf ./arch-defs-install.tar.xz -C $INSTALL_DIR
-# adding quicklogic toolchain binaries to PATH
 export PATH=$INSTALL_DIR/install/bin:$PATH
 conda activate
-# counter example
-pushd quicklogic && make && popd
+pushd examples/quicklogic && make && popd
 ```

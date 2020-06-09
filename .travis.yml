@@ -50,6 +50,7 @@ jobs:
         - bash miniconda.sh -b -p $INSTALL_DIR/miniconda && rm miniconda.sh
         - source "$INSTALL_DIR/miniconda/etc/profile.d/conda.sh"
         - conda update -y -q conda
+        - tar -xf arch-defs-install.tar.xz -C $INSTALL_DIR
         - conda install -y -c antmicro/label/ql yosys yosys-plugins vtr-no-gui
         - conda install -y make lxml simplejson intervaltree git pip
         - conda activate
@@ -60,7 +61,6 @@ jobs:
         - conda deactivate
       script:
         - source "$INSTALL_DIR/miniconda/etc/profile.d/conda.sh"
-        - tar -xf arch-defs-install.tar.xz -C $INSTALL_DIR
         - export PATH=$INSTALL_DIR/install/bin:$PATH
         - conda activate
         - pushd examples/quicklogic && make && popd
