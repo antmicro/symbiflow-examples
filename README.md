@@ -1,7 +1,7 @@
 # SymbiFlow examples
 
-This repository provides example FPGA designs that can be built using SymbiFlow open source toolchain.
-The examples target the Artix-7 and the EOS S3 devices.
+This repository provides example FPGA designs that can be built using the SymbiFlow open source toolchain.
+The examples target the Xilinx Artix-7 and the QuickLogic EOS S3 devices.
 
 The repository includes:
 
@@ -45,7 +45,6 @@ This block of code regards the toolchain installation. It is divided in three ma
 ```bash
 wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 ```
-
 
 1. Toolchain for the Artix-7 devices:
 ```bash
@@ -96,7 +95,7 @@ The example designs are provided in separate directories:
 The Linux images for the `linux_litex` example can be build following the [linux on litex vexriscv](https://github.com/litex-hub/linux-on-litex-vexriscv) instructions.
 The `linux_litex` example is already provided with working Linux images.
 
-To build the examples, run following commands:
+To build the examples, run the following commands:
 
 ```bash
 export INSTALL_DIR=/opt/symbiflow/xc7
