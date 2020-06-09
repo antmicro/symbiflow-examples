@@ -27,13 +27,13 @@ jobs:
       install:
         - bash miniconda.sh -b -p $INSTALL_DIR/miniconda && rm miniconda.sh
         - source "$INSTALL_DIR/miniconda/etc/profile.d/conda.sh"
-        - conda config --set always_yes yes --set changeps1 no
         - conda update -q conda
-        - conda activate
         - conda install -c antmicro/label/ql yosys
         - conda install -c antmicro/label/ql yosys-plugins
-        - conda install -c symbifloe vtr-no-gui
-        - conda install lxml simplejson intervaltree python-constraint git pip
+        - conda install -c symbiflow vtr-no-gui
+        - conda install -y make lxml simplejson intervaltree git pip
+        - conda activate
+        - pip install python-constraint
         - pip install git+https://github.com/symbiflow/fasm
         - pip install git+https://github.com/antmicro/quicklogic-fasm
         - pip install git+https://github.com/antmicro/quicklogic-fasm-utils
