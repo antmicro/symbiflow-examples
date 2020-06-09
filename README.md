@@ -53,8 +53,7 @@ conda install -y make lxml simplejson intervaltree git pip
 For the Artix-7 devices:
 
 ```bash
-conda install -y -c symbiflow
-conda install yosys yosys-plugins vtr-no-gui
+conda install -y -c symbiflow yosys yosys-plugins vtr-no-gui
 conda activate
 pip install python-constraint git+https://github.com/symbiflow/fasm
 conda deactivate
@@ -63,8 +62,7 @@ conda deactivate
 For the EOS S3 devices:
 
 ```bash
-conda install -y -c antmicro/label/ql
-conda install yosys yosys-plugins vtr-no-gui
+conda install -y -c antmicro/label/ql yosys yosys-plugins vtr-no-gui
 conda activate
 pip install python-constraint git+https://github.com/symbiflow/fasm
 pip install git+https://github.com/antmicro/quicklogic-fasm
