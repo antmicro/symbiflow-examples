@@ -34,7 +34,7 @@ For the Artix-7 devices:
 ```bash
 INSTALL_DIR="/opt/symbiflow/xc7"
 bash conda_installer.sh -b -p $INSTALL_DIR/conda && rm conda_installer.sh
-source $INSTALL_DIR/conda/etc/profile.d/conda.sh
+source "$INSTALL_DIR/conda/etc/profile.d/conda.sh"
 conda update -y -q conda
 
 wget -qO- https://storage.googleapis.com/symbiflow-arch-defs/artifacts/prod/foss-fpga-tools/symbiflow-arch-defs/continuous/install/4/20200416-002215/symbiflow-arch-defs-install-a321d9d9.tar.xz | tar -xJ -C $INSTALL_DIR
