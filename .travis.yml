@@ -28,9 +28,8 @@ jobs:
         - bash miniconda.sh -b -p $INSTALL_DIR/miniconda && rm miniconda.sh
         - source "$INSTALL_DIR/miniconda/etc/profile.d/conda.sh"
         - conda update -q conda
-        - conda install -c antmicro/label/ql yosys
-        - conda install -c antmicro/label/ql yosys-plugins
-        - conda install -c symbiflow vtr-no-gui
+        - conda install -y -c antmicro/label/ql yosys yosys-plugins
+        - conda install -y -c symbiflow vtr-no-gui
         - conda install -y make lxml simplejson intervaltree git pip
         - conda activate
         - pip install python-constraint
