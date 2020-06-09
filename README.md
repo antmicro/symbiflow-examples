@@ -105,11 +105,11 @@ source $INSTALL_DIR/conda/etc/profile.d/conda.sh
 conda activate
 git clone https://github.com/SymbiFlow/symbiflow-examples && cd symbiflow-examples
 # counter example
-pushd counter_test && make && popd
+pushd examples/xc7/counter_test && make && popd
 # picosoc example
-pushd picosoc_demo && make && popd
+pushd examples/xc7/picosoc_demo && make && popd
 # litex example
-pushd linux_litex_demo && make && popd
+pushd examples/xc7/linux_litex_demo && make && popd
 ```
 
 ### Example design for the EOS S3 devices:
@@ -119,9 +119,11 @@ pushd linux_litex_demo && make && popd
 To build the example, run following commands:
 
 ```bash
-INSTALL_DIR=/opt/symbiflow/quicklogic
-source "$INSTALL_DIR/miniconda/etc/profile.d/conda.sh"
+export INSTALL_DIR=/opt/symbiflow/quicklogic
+# adding symbiflow toolchain binaries to PATH
 export PATH=$INSTALL_DIR/install/bin:$PATH
+source "$INSTALL_DIR/miniconda/etc/profile.d/conda.sh"
 conda activate
+git clone https://github.com/SymbiFlow/symbiflow-examples && cd symbiflow-examples
 pushd examples/eos-s3 && make && popd
 ```
