@@ -1,7 +1,7 @@
 # SymbiFlow examples
 
 This repository provides example FPGA designs that can be built using SymbiFlow open source toolchain.
-The examples target the Artix-7 devices.
+The examples target the Artix-7 and the EOS S3 devices.
 
 The repository includes:
 
@@ -30,7 +30,7 @@ The CI performs the following steps:
     * [VTR](https://anaconda.org/symbiflow/vtr)
     * [Yosys](https://anaconda.org/symbiflow/yosys)
     * [Yosys-plugins](https://anaconda.org/symbiflow/yosys-plugins)
-    * [lxml](https://anaconda.org/conda-forge/lxml), [simplejson](https://anaconda.org/conda-forge/simplejson), [intervaltree](https://anaconda.org/conda-forge/intervaltree), [python-constraint](https://anaconda.org/conda-forge/python-constraint), [git](https://anaconda.org/conda-forge/git), [pip](https://anaconda.org/conda-forge/pip) and [fasm](https://github.com/SymbiFlow/fasm)
+    * [lxml](https://anaconda.org/conda-forge/lxml), [simplejson](https://anaconda.org/conda-forge/simplejson), [intervaltree](https://anaconda.org/conda-forge/intervaltree), [python-constraint](https://anaconda.org/conda-forge/python-constraint), [git](https://anaconda.org/conda-forge/git), [pip](https://anaconda.org/conda-forge/pip), [fasm](https://github.com/SymbiFlow/fasm), [quicklogic-fasm](https://github.com/antmicro/quicklogic-fasm) and [quicklogic-fasm-utils](https://github.com/antmicro/quicklogic-fasm-utils)
 
 ## Toolchain installation
 
@@ -40,8 +40,9 @@ This block of code regards the toolchain installation. It is divided in three ma
 - Conda packages installation
 - Architecture definitions installation
 
+1. Toolchain for the Artix-7 devices:
 ```bash
-INSTALL_DIR=/opt/symbiflow
+INSTALL_DIR=/opt/symbiflow/xc7
 wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh -b -p $INSTALL_DIR/conda && rm Miniconda3-latest-Linux-x86_64.sh
 source $INSTALL_DIR/conda/etc/profile.d/conda.sh
@@ -55,11 +56,36 @@ pip install git+https://github.com/symbiflow/fasm
 conda deactivate
 ```
 
+2. Toolchain for the EOS S3 devices:
+```bash
+INSTALL_DIR=/opt/symbiflow/quicklogic
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+bash miniconda.sh -b -p $INSTALL_DIR/miniconda && rm miniconda.sh
+source "$INSTALL_DIR/miniconda/etc/profile.d/conda.sh"
+conda config --set always_yes yes --set changeps1 no
+conda update -q conda
+conda config --add channels conda-forge
+conda config --add channels antmicro/label/ql
+conda activate
+conda install -c antmicro/label/ql yosys
+conda install -c antmicro/label/ql yosys-plugins
+conda install -c antmicro/label/ql vtr
+conda install lxml simplejson intervaltree python-constraint git pip
+pip install git+https://github.com/symbiflow/fasm
+pip install git+https://github.com/antmicro/quicklogic-fasm
+pip install git+https://github.com/antmicro/quicklogic-fasm-utils
+conda deactivate
+```
+
 ## Build Example Designs
 
 With the toolchain installed, you can build the example designs.
-
 The example designs are provided in separate directories:
+
+* `xc7` directory for the Artix-7 devices
+* `quicklogic_demo` directory for the EOS S3 devices
+
+### The example designs for the Artix-7 devices:
 
 1. `counter` - simple 4-bit counter driving LEDs. The design targets the [Basys3 board](https://store.digilentinc.com/basys-3-artix-7-fpga-trainer-board-recommended-for-introductory-users/) and the [Arty board](https://store.digilentinc.com/arty-a7-artix-7-fpga-development-board-for-makers-and-hobbyists/).
 1. `picosoc` - [picorv32](https://github.com/cliffordwolf/picorv32) based SoC. The design targets the [Basys3 board](https://store.digilentinc.com/basys-3-artix-7-fpga-trainer-board-recommended-for-introductory-users/).
@@ -71,7 +97,7 @@ The `linux_litex` example is already provided with working Linux images.
 To build the examples, run following commands:
 
 ```bash
-export INSTALL_DIR=/opt/symbiflow
+export INSTALL_DIR=/opt/symbiflow/xc7
 # adding symbiflow toolchain binaries to PATH
 export PATH=$INSTALL_DIR/install/bin:$PATH
 source $INSTALL_DIR/conda/etc/profile.d/conda.sh
@@ -83,4 +109,22 @@ pushd counter_test && make && popd
 pushd picosoc_demo && make && popd
 # litex example
 pushd linux_litex_demo && make && popd
+```
+
+### The example design for the EOS S3 devices:
+
+1. `btn_counter` - simple 4-bit counter driving LEDs. The design targets the [EOS S3 board](https://www.quicklogic.com/products/eos-s3/).
+
+To build the example, run following commands:
+
+```bash
+INSTALL_DIR=/opt/symbiflow/quicklogic
+source "$INSTALL_DIR/miniconda/etc/profile.d/conda.sh"
+git clone https://github.com/SymbiFlow/symbiflow-examples && cd symbiflow-examples
+tar -xf ./arch-defs-install.tar.xz -C $INSTALL_DIR
+# adding quicklogic toolchain binaries to PATH
+export PATH=$INSTALL_DIR/install/bin:$PATH
+conda activate
+# counter example
+pushd quicklogic_demo && make && popd
 ```
