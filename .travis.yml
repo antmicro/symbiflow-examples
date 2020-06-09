@@ -36,7 +36,8 @@ script:
         - conda activate
         - git clone https://github.com/SymbiFlow/symbiflow-examples && cd symbiflow-examples
         - # counter example
-        - pushd counter_test && make && popd
+        - pushd counter_test/arty && make && popd
+        - pushd counter_test/basys3 && make && popd
         - # picosoc example
         - pushd picosoc_demo && make && popd
         - # litex example
