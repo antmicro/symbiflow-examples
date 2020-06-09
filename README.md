@@ -24,7 +24,7 @@ This section describes how to install the toolchain. This procedure is divided i
 
 ### Setup installation directory
 
-For Xilinx, run:
+For Artix 7, run:
 
 ```bash
 INSTALL_DIR=/opt/symbiflow/xc7
