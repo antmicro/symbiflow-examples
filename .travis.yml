@@ -43,6 +43,7 @@ jobs:
         - pushd examples/xc7/counter_test/basys3 && make && popd
         - pushd examples/xc7/picosoc_demo && make && popd
         - pushd examples/xc7/linux_litex_demo && make && popd
+    - #
       env:
         - INSTALL_DIR: /opt/symbiflow/quicklogic
       install:
