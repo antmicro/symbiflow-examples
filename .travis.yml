@@ -10,15 +10,23 @@ addons:
         - wget
         - locales
 
+stages:
+    - xc7
+    - quicklogic
+
 before_install:
         - sudo locale-gen "en_US.UTF-8"
         - export LANG="en_US.UTF-8"
+        - wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
 
-install:
-        - export INSTALL_DIR=/opt/symbiflow
-        - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-        - bash Miniconda3-latest-Linux-x86_64.sh -b -p $INSTALL_DIR/conda && rm Miniconda3-latest-Linux-x86_64.sh
-        - source $INSTALL_DIR/conda/etc/profile.d/conda.sh
+jobs:
+  include:
+    - stage: xc7
+      env:
+        - INSTALL_DIR: /opt/symbiflow/xc7
+      install:
+        - bash miniconda.sh -b -p $INSTALL_DIR/miniconda && rm miniconda.sh
+        - source "$INSTALL_DIR/miniconda/etc/profile.d/conda.sh"
         - conda update -y -q conda
         - wget -qO- https://storage.googleapis.com/symbiflow-arch-defs/artifacts/prod/foss-fpga-tools/symbiflow-arch-defs/continuous/install/4/20200416-002215/symbiflow-arch-defs-install-a321d9d9.tar.xz | tar -xJ -C $INSTALL_DIR
         - conda install -y -c symbiflow yosys yosys-plugins vtr-no-gui
@@ -27,18 +35,37 @@ install:
         - pip install python-constraint
         - pip install git+https://github.com/symbiflow/fasm
         - conda deactivate
-
-script:
-        - export INSTALL_DIR=/opt/symbiflow
-        - # adding symbiflow toolchain binaries to PATH
+      script:
+        - source "$INSTALL_DIR/miniconda/etc/profile.d/conda.sh"
         - export PATH=$INSTALL_DIR/install/bin:$PATH
-        - source $INSTALL_DIR/conda/etc/profile.d/conda.sh
         - conda activate
-        - git clone https://github.com/SymbiFlow/symbiflow-examples && cd symbiflow-examples
-        - # counter example
-        - pushd counter_test/arty && make && popd
-        - pushd counter_test/basys3 && make && popd
-        - # picosoc example
-        - pushd picosoc_demo && make && popd
-        - # litex example
-        - pushd linux_litex_demo && make && popd
+        - pushd xc7/counter_test/arty && make && popd
+        - pushd xc7/counter_test/basys3 && make && popd
+        - pushd xc7/picosoc_demo && make && popd
+        - pushd xc7/linux_litex_demo && make && popd
+
+    - stage: quicklogic
+      env:
+        - INSTALL_DIR: /opt/symbiflow/quicklogic
+      install:
+        - bash miniconda.sh -b -p $INSTALL_DIR/miniconda && rm miniconda.sh
+        - source "$INSTALL_DIR/miniconda/etc/profile.d/conda.sh"
+        - conda config --set always_yes yes --set changeps1 no
+        - conda update -q conda
+        - conda config --add channels conda-forge
+        - conda config --add channels antmicro/label/ql
+        - conda activate
+        - conda install -c antmicro/label/ql yosys
+        - conda install -c antmicro/label/ql yosys-plugins
+        - conda install -c antmicro/label/ql vtr
+        - conda install lxml simplejson intervaltree python-constraint git pip
+        - pip install git+https://github.com/symbiflow/fasm
+        - pip install git+https://github.com/antmicro/quicklogic-fasm
+        - pip install git+https://github.com/antmicro/quicklogic-fasm-utils
+        - conda deactivate
+      script:
+        - source "$INSTALL_DIR/miniconda/etc/profile.d/conda.sh"
+        - tar -xf arch-defs-install.tar.xz -C $INSTALL_DIR
+        - export PATH=$INSTALL_DIR/install/bin:$PATH
+        - conda activate
+        - pushd quicklogic_demo && make && popd
