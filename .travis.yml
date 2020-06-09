@@ -21,7 +21,7 @@ before_install:
 
 jobs:
   include:
-    - stage: xc7
+    - stage: SymbiFlow
       env:
         - INSTALL_DIR: /opt/symbiflow/xc7
       install:
@@ -39,11 +39,10 @@ jobs:
         - source "$INSTALL_DIR/miniconda/etc/profile.d/conda.sh"
         - export PATH=$INSTALL_DIR/install/bin:$PATH
         - conda activate
-        - pushd xc7/counter_test/arty && make && popd
-        - pushd xc7/counter_test/basys3 && make && popd
-        - pushd xc7/picosoc_demo && make && popd
-        - pushd xc7/linux_litex_demo && make && popd
-    - stage: quicklogic
+        - pushd examples/xc7/counter_test/arty && make && popd
+        - pushd examples/xc7/counter_test/basys3 && make && popd
+        - pushd examples/xc7/picosoc_demo && make && popd
+        - pushd examples/xc7/linux_litex_demo && make && popd
       env:
         - INSTALL_DIR: /opt/symbiflow/quicklogic
       install:
@@ -63,4 +62,4 @@ jobs:
         - tar -xf arch-defs-install.tar.xz -C $INSTALL_DIR
         - export PATH=$INSTALL_DIR/install/bin:$PATH
         - conda activate
-        - pushd quicklogic && make && popd
+        - pushd examples/quicklogic && make && popd
