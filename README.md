@@ -124,5 +124,5 @@ INSTALL_DIR=/opt/symbiflow/quicklogic
 source "$INSTALL_DIR/miniconda/etc/profile.d/conda.sh"
 export PATH=$INSTALL_DIR/install/bin:$PATH
 conda activate
-pushd examples/quicklogic && make && popd
+pushd examples/eos-s3 && make && popd
 ```
