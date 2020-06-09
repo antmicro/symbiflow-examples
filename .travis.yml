@@ -45,7 +45,7 @@ jobs:
         - pushd examples/xc7/linux_litex_demo && make && popd
     - #
       env:
-        - INSTALL_DIR: /opt/symbiflow/quicklogic
+        - INSTALL_DIR: /opt/symbiflow/eos-s3
       install:
         - bash miniconda.sh -b -p $INSTALL_DIR/miniconda && rm miniconda.sh
         - source "$INSTALL_DIR/miniconda/etc/profile.d/conda.sh"

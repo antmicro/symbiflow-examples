@@ -63,7 +63,7 @@ conda deactivate
 
 2. Toolchain for the EOS S3 devices:
 ```bash
-INSTALL_DIR=/opt/symbiflow/quicklogic
+INSTALL_DIR=/opt/symbiflow/eos-s3
 bash miniconda.sh -b -p $INSTALL_DIR/miniconda && rm miniconda.sh
 source "$INSTALL_DIR/miniconda/etc/profile.d/conda.sh"
 conda update -y -q conda
