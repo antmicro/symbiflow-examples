@@ -41,9 +41,9 @@ wget -qO- https://storage.googleapis.com/symbiflow-arch-defs-install/quicklogic/
 ### Install Conda and common dependencies
 
 ```bash
-wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-bash miniconda.sh -b -p $INSTALL_DIR/miniconda && rm miniconda.sh
-source $INSTALL_DIR/miniconda/etc/profile.d/conda.sh
+wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O conda_installer.sh
+bash conda_installer.sh -b -p $INSTALL_DIR/conda && rm conda_installer.sh
+source $INSTALL_DIR/conda/etc/profile.d/conda.sh
 conda update -y -q conda
 conda install -y make lxml simplejson intervaltree git pip yosys yosys-plugins vtr-no-gui
 ```
@@ -93,7 +93,7 @@ To build the examples, run the following commands:
 export INSTALL_DIR=/opt/symbiflow/xc7
 # adding symbiflow toolchain binaries to PATH
 export PATH=$INSTALL_DIR/install/bin:$PATH
-source $INSTALL_DIR/conda/etc/profile.d/conda.sh
+source "$INSTALL_DIR/conda/etc/profile.d/conda.sh"
 conda activate
 git clone https://github.com/SymbiFlow/symbiflow-examples && cd symbiflow-examples
 # counter example
@@ -114,7 +114,7 @@ To build the example, run following commands:
 export INSTALL_DIR=/opt/symbiflow/eos-s3
 # adding symbiflow toolchain binaries to PATH
 export PATH=$INSTALL_DIR/install/bin:$PATH
-source "$INSTALL_DIR/miniconda/etc/profile.d/conda.sh"
+source "$INSTALL_DIR/conda/etc/profile.d/conda.sh"
 conda activate
 git clone https://github.com/SymbiFlow/symbiflow-examples && cd symbiflow-examples
 pushd examples/eos-s3 && make && popd
