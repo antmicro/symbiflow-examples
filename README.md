@@ -23,14 +23,14 @@ This section describes how to install the toolchain. This procedure is divided i
 
 1. Conda installation:
 ```bash
-wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
 ```
 
 1. Toolchain for the Artix-7 devices:
 ```bash
 INSTALL_DIR=/opt/symbiflow/xc7
-bash Miniconda3-latest-Linux-x86_64.sh -b -p $INSTALL_DIR/conda && rm Miniconda3-latest-Linux-x86_64.sh
-source $INSTALL_DIR/conda/etc/profile.d/conda.sh
+bash miniconda.sh -b -p $INSTALL_DIR/miniconda && rm miniconda.sh
+source $INSTALL_DIR/miniconda/etc/profile.d/conda.sh
 conda update -y -q conda
 
 wget -qO- https://storage.googleapis.com/symbiflow-arch-defs/artifacts/prod/foss-fpga-tools/symbiflow-arch-defs/continuous/install/4/20200416-002215/symbiflow-arch-defs-install-a321d9d9.tar.xz | tar -xJ -C $INSTALL_DIR
