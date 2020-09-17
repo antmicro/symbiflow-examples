@@ -59,8 +59,7 @@ This section describes how to install the toolchain. This procedure is divided i
         source "$INSTALL_DIR/conda/etc/profile.d/conda.sh"
         conda env create -f eos-s3/environment.yml
         conda activate eos-s3
-        wget -qO- https://quicklogic-my.sharepoint.com/:u:/p/kkumar/Eb7341Bq-XRAukVQ6oQ6PrgB-qdFbrsrPEON1yTa4krFSA?download=1 | tar -xJ -C $INSTALL_DIR
-        cp -r $INSTALL_DIR/conda/envs/eos-s3/share/yosys/* $INSTALL_DIR/conda/envs/eos-s3/share/
+        wget -qO- https://quicklogic-my.sharepoint.com/:u:/p/kkumar/EWuqtXJmalROpI2L5XeewMIBRYVCY8H4yc10nlli-Xq79g?download=1 | tar -xJ -C $INSTALL_DIR
         conda deactivate
 
 Build Example Designs
