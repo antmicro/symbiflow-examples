@@ -45,8 +45,9 @@ install:
         --tty
         $OS:$OS_VERSION
  - docker start $DOCKER_NAME
- - if [ "$OS" = "ubuntu" ]; then tuttest README.rst unnamed0 --prefix-lines-with "$IN_DOCKER_EXEC" | bash -
- - if [ "$OS" = "centos" ]; then tuttest README.rst unnamed1 --prefix-lines-with "$IN_DOCKER_EXEC" | bash -
+ - if [ "$OS" = "ubuntu" ]; then tuttest README.rst unnamed0 --prefix-lines-with "$IN_DOCKER_EXEC"; fi
+ - if [ "$OS" = "ubuntu" ]; then tuttest README.rst unnamed0 --prefix-lines-with "$IN_DOCKER_EXEC" | bash -; fi
+ - if [ "$OS" = "centos" ]; then tuttest README.rst unnamed1 --prefix-lines-with "$IN_DOCKER_EXEC" | bash -; fi
  - tuttest README.rst unnamed2 --prefix-lines-with "$IN_DOCKER_EXEC" | bash -
  - if [ "$TOOLCHAIN" = "xilinx-series-7" ]; then tuttest xc7/README.rst unnamed0 --prefix-lines-with "$IN_DOCKER_EXEC" | bash -; fi
  - if [ "$TOOLCHAIN" = "quicklogic" ];      then tuttest eos-s3/README.rst unnamed0 --prefix-lines-with "$IN_DOCKER_EXEC" | bash -; fi

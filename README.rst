@@ -30,11 +30,11 @@ The only required prerequisite is ``wget``. You can install it using:
 
 .. code:: bash
 
-   apt install -y wget
+   apt update && apt install -y wget
 
 * For CentOS:
 
-.. code::bash
+.. code:: bash
 
    yum install -y wget
 
