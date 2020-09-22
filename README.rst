@@ -22,6 +22,22 @@ The repository includes:
 
 * `.travis.yml <.travis.yml>`_ - Travis CI configuration file
 
+Prerequisites
+-------------
+The only required prerequisite is ``wget``. You can install it using:
+
+* For Ubuntu:
+
+.. code:: bash
+
+   apt install -y wget
+
+* For CentOS:
+
+.. code::bash
+
+   yum install -y wget
+
 Toolchain installation
 ----------------------
 
