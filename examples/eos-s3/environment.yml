@@ -11,6 +11,7 @@ dependencies:
   - intervaltree
   - git
   - pip
+  - openocd
   # Packages installed from PyPI
   - pip:
     - -r file:requirements.txt
