@@ -12,4 +12,6 @@ before_install:
   - sudo pip3 install dataclasses
   - sudo pip3 install git+https://github.com/antmicro/tuttest
 
-script: .github/travis/build.sh $FPGA_FAM
+script:
+  - scripts/ci/install-toolchain.sh $FPGA_FAM
+  - scripts/ci/build.sh $FPGA_FAM
