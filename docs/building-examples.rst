@@ -56,7 +56,7 @@ Enter the directory that contains examples for Xilinx 7-Series FPGAs:
 .. code-block:: bash
    :name: enter-dir-xc7
 
-   cd examples/xc7
+   cd xc7
 
 Counter test
 ~~~~~~~~~~~~
@@ -232,7 +232,7 @@ Enter the directory that contains examples for QuickLogic EOS S3:
 .. code-block:: bash
    :name: enter-dir-eos-s3
 
-   cd examples/eos-s3
+   cd eos-s3
 
 Button counter
 ~~~~~~~~~~~~~~
