@@ -123,13 +123,13 @@ Now you can upload the design with:
 
 You should observe the following line in the OpenOCD output:
 
- .. code-block::
+.. code-block::
 
    Info : JTAG tap: xc7.tap tap/device found: 0x0362d093 (mfg: 0x049 (Xilinx), part: 0x362d, ver: 0x0)
 
 The UART output should look as follows:
 
- .. code-block::
+.. code-block::
 
    Terminal ready
    Press ENTER to continue..
