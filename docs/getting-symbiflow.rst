@@ -101,7 +101,7 @@ Next, setup Conda and your system's enviroment:
 
    bash conda_installer.sh -u -b -p $INSTALL_DIR/$FPGA_FAM/conda;
    source "$INSTALL_DIR/$FPGA_FAM/conda/etc/profile.d/conda.sh";
-   conda env create -f examples/$FPGA_FAM/environment.yml
+   conda env create -f $FPGA_FAM/environment.yml
 
 Download architecture definitions:
 
