@@ -1,8 +1,17 @@
+ifdef USE_MAKE_ENV
 TOP_DIR := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 REQUIREMENTS_FILE := requirements.txt
 ENVIRONMENT_FILE := environment.yml
 
 include ../third_party/make-env/conda.mk
+else
+$(info You are currently not using make-env. Use:)
+$(info )
+$(info export USE_MAKE_ENV=1)
+$(info )
+$(info to enable make-env support.)
+$(info )
+endif
 
 # Minimal makefile for Sphinx documentation
 #
