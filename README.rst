@@ -30,11 +30,17 @@ repository (GH Actions provide only 12 GiBs).
 Building those docs
 -------------------
 
-Just run::
+To build Sphinx documentation, you need at least Python 3.6. You will also need
+to install Sphinx v3.3.0 and additional dependencies, which you can get with
+``pip``::
 
-   make html
+   pip install -r docs/requirements.txt
 
-The output will be found in the ``build/html`` directory.
+Next, just run::
+
+   make -C docs html
+
+The output will be found in the ``docs/_build/html`` directory.
 
 Running "CI" locally
 --------------------
@@ -42,7 +48,10 @@ Running "CI" locally
 The CI uses a bunch of scripts in the `scripts/ci/ <./scripts/ci>`_ directory to execute the needed tests.
 You can use the same scripts locally to test without having to wait for the online CIs to pass if you want to quickly test stuff.
 
-For this, you will need `tuttest <https://github.com/antmicro/tuttest/>`_.
+For this, you will need `tuttest <https://github.com/antmicro/tuttest/>`_,
+which you can install with::
+
+    pip install git+https://github.com/antmicro/tuttest
 
 ``<fpga-fam>`` is one of ``{eos-s3,xc7}`` (the two currently covered platforms - EOS S3 and Xilinx series 7).
 
