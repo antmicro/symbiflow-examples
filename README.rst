@@ -30,11 +30,17 @@ repository (GH Actions provide only 12 GiBs).
 Building those docs
 -------------------
 
-Just run::
+To build Sphinx documentation, you need at least Python 3.6. You will also need
+to install Sphinx v3.3.0 and additional dependencies, which you can get with
+``pip``::
 
-   make html
+   pip install -r docs/requirements.txt
 
-The output will be found in the ``build/html`` directory.
+Next, just run::
+
+   make -C docs html
+
+The output will be found in the ``docs/_build/html`` directory.
 
 Running "CI" locally
 --------------------
