@@ -1,0 +1,27 @@
+name: doc-test
+
+on: [push, pull_request]
+
+jobs:
+  test-sphinx-docs:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        fpga-fam:
+          - 'xc7'
+          - 'eos-s3'
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install tuttest
+        run: |
+            sudo apt update -y
+            sudo apt install -y python3-pip python3-setuptools git
+            sudo pip3 install dataclasses
+            sudo pip3 install git+https://github.com/antmicro/tuttest
+
+      - name: Setup Conda environment
+        run: scripts/ci/install-toolchain.sh ${{ matrix.fpga-fam }}
+        
+      - name: Build examples
+        run: scripts/ci/build.sh ${{ matrix.fpga-fam }}
