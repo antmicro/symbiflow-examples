@@ -6,22 +6,37 @@ jobs:
   test-sphinx-docs:
     runs-on: ubuntu-18.04
     strategy:
+      fail-fast: false
       matrix:
-        fpga-fam:
-          - 'xc7'
-          - 'eos-s3'
-    
+        include:
+          - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "bionic"}
+          - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "eoan"}
+          - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "focal"}
+          - {fpga-fam: "xc7",    os: "ubuntu", os-version: "bionic"}
+          - {fpga-fam: "xc7",    os: "ubuntu", os-version: "eoan"}
+          - {fpga-fam: "xc7",    os: "ubuntu", os-version: "focal"}
+    env:
+      LANG: "en_US.UTF-8"
+      DOCKER_NAME: test
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Setup repository
+        uses: actions/checkout@v2
+
+      - name: Setup Docker
+        run: |
+            docker create --name $DOCKER_NAME -v $PWD:$PWD --workdir $PWD --tty ${{matrix.os}}:${{matrix.os-version}}
+            docker start $DOCKER_NAME
+
       - name: Install tuttest
         run: |
-            sudo apt update -y
-            sudo apt install -y python3-pip python3-setuptools git
-            sudo pip3 install dataclasses
-            sudo pip3 install git+https://github.com/antmicro/tuttest
+            docker exec -t $DOCKER_NAME apt update -y
+            docker exec -t $DOCKER_NAME apt install -y python3-pip python3-setuptools git wget
+            docker exec -t $DOCKER_NAME pip3 install dataclasses
+            docker exec -t $DOCKER_NAME pip3 install git+https://github.com/antmicro/tuttest
 
       - name: Setup Conda environment
-        run: scripts/ci/install-toolchain.sh ${{ matrix.fpga-fam }}
+        run: docker exec -t $DOCKER_NAME scripts/ci/install-toolchain.sh ${{matrix.fpga-fam}}
         
       - name: Build examples
-        run: scripts/ci/build.sh ${{ matrix.fpga-fam }}
+        run: docker exec -t $DOCKER_NAME scripts/ci/build.sh ${{matrix.fpga-fam}}
