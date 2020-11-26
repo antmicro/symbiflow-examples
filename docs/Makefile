@@ -1,3 +1,9 @@
+TOP_DIR := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
+REQUIREMENTS_FILE := requirements.txt
+ENVIRONMENT_FILE := environment.yml
+
+include ../third_party/make-env/conda.mk
+
 # Minimal makefile for Sphinx documentation
 #
 
