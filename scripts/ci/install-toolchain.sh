@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 fpga_fam=$1
 
