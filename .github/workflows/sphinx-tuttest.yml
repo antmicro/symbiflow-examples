@@ -9,9 +9,11 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "xenial"}
           - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "bionic"}
           - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "eoan"}
           - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "focal"}
+          - {fpga-fam: "xc7",    os: "ubuntu", os-version: "xenial"}
           - {fpga-fam: "xc7",    os: "ubuntu", os-version: "bionic"}
           - {fpga-fam: "xc7",    os: "ubuntu", os-version: "eoan"}
           - {fpga-fam: "xc7",    os: "ubuntu", os-version: "focal"}
@@ -22,6 +24,9 @@ jobs:
     steps:
       - name: Setup repository
         uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v1
 
       - name: Setup Docker
         run: |
