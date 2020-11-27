@@ -7,6 +7,9 @@ distro=$1
 if [ "$distro" == "ubuntu" ]; then
     apt update -y
     apt install -y python3-pip python3-setuptools git wget
+else
+    yum update -y
+    yum install -y python3-pip python3-setuptools git wget which
 fi
 
 # install python deps
