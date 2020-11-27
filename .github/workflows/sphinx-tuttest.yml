@@ -32,20 +32,13 @@ jobs:
       - name: Setup repository
         uses: actions/checkout@v2
 
-      - name: Setup Python
-        uses: actions/setup-python@v1
-
       - name: Setup Docker
         run: |
             docker create --name $DOCKER_NAME -v $PWD:$PWD --workdir $PWD --tty ${{matrix.os}}:${{matrix.os-version}}
             docker start $DOCKER_NAME
 
       - name: Install tuttest
-        run: |
-            docker exec -t $DOCKER_NAME apt update -y
-            docker exec -t $DOCKER_NAME apt install -y python3-pip python3-setuptools git wget
-            docker exec -t $DOCKER_NAME pip3 install dataclasses
-            docker exec -t $DOCKER_NAME pip3 install git+https://github.com/antmicro/tuttest
+        run: docker exec -t $DOCKER_NAME scripts/ci/install-deps.sh ${{matrix.os}}
 
       - name: Setup Conda environment
         run: docker exec -t $DOCKER_NAME scripts/ci/install-toolchain.sh ${{matrix.fpga-fam}}
