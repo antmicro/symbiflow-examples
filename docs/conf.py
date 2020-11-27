@@ -28,6 +28,7 @@ copyright = authors + u', 2020'
 # ones.
 extensions = [
     'sphinx_tabs.tabs',
+    'sphinxcontrib.jinja',
 ]
 
 # Add any paths that contain templates here, relative to this directory.

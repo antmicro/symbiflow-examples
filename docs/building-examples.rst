@@ -68,10 +68,11 @@ counter example, run the following command:
 
    .. group-tab:: Arty 35T
 
-      .. code-block:: bash
-         :name: example-counter-a35t
-
-         TARGET="arty_35" make -C counter_test
+      .. include:: ../xc7/counter_test/README.rst
+         :code: bash
+         :start-after: a35t
+         :end-before: ..
+         :tab-width: 0
 
    .. group-tab:: Arty 100T
 
