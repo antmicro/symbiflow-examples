@@ -64,29 +64,21 @@ Counter test
 This example design features a simple 4-bit countrer driving LEDs. To build the
 counter example, run the following command:
 
-.. tabs::
+.. jinja:: xc7
 
-   .. group-tab:: Arty 35T
+   .. tabs::
 
-      .. include:: ../xc7/counter_test/README.rst
-         :code: bash
-         :start-after: a35t
-         :end-before: ..
-         :tab-width: 0
+   {% for k, v in xc7_counter.items() %}
 
-   .. group-tab:: Arty 100T
 
-      .. code-block:: bash
-         :name: example-counter-a100t
+      .. group-tab:: {{v}}
 
-         TARGET="arty_100" make -C counter_test
+         .. include:: ../xc7/counter_test/README.rst
+            :code: bash
+            :start-after: {{k}}
+            {% if k != 'basys3' %}:end-before: .. {% endif %}
 
-   .. group-tab:: Basys 3
-
-      .. code-block:: bash
-         :name: example-counter-basys3
-
-         TARGET="basys3" make -C counter_test
+   {% endfor %}
 
 Now you can upload the design with:
 

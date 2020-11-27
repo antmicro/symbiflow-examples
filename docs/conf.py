@@ -31,6 +31,16 @@ extensions = [
     'sphinxcontrib.jinja',
 ]
 
+jinja_contexts = {
+    'xc7': {
+        'xc7_counter': {
+            'a35t': 'Arty 35T',
+            'a100t': 'Arty 100T',
+            'basys3': 'Basys 3',
+        },
+    },
+}
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
