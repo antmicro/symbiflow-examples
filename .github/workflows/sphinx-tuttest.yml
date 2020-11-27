@@ -14,15 +14,15 @@ jobs:
           - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "focal",  example: "counter"}
 
           - {fpga-fam: "xc7",    os: "ubuntu", os-version: "bionic", example: "counter"}
-          - {fpga-fam: "xc7",    os: "ubuntu", os-version: "bionic", example: "counter"}
-          - {fpga-fam: "xc7",    os: "ubuntu", os-version: "bionic", example: "counter"}
+          - {fpga-fam: "xc7",    os: "ubuntu", os-version: "eoan",   example: "counter"}
+          - {fpga-fam: "xc7",    os: "ubuntu", os-version: "focal",  example: "counter"}
 
+          - {fpga-fam: "xc7",    os: "ubuntu", os-version: "bionic", example: "picosoc"}
           - {fpga-fam: "xc7",    os: "ubuntu", os-version: "eoan",   example: "picosoc"}
-          - {fpga-fam: "xc7",    os: "ubuntu", os-version: "eoan",   example: "picosoc"}
-          - {fpga-fam: "xc7",    os: "ubuntu", os-version: "eoan",   example: "picosoc"}
+          - {fpga-fam: "xc7",    os: "ubuntu", os-version: "focal",  example: "picosoc"}
 
-          - {fpga-fam: "xc7",    os: "ubuntu", os-version: "focal",  example: "litex"}
-          - {fpga-fam: "xc7",    os: "ubuntu", os-version: "focal",  example: "litex"}
+          - {fpga-fam: "xc7",    os: "ubuntu", os-version: "bionic", example: "litex"}
+          - {fpga-fam: "xc7",    os: "ubuntu", os-version: "eoan",   example: "litex"}
           - {fpga-fam: "xc7",    os: "ubuntu", os-version: "focal",  example: "litex"}
     env:
       LANG: "en_US.UTF-8"
