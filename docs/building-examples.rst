@@ -70,13 +70,12 @@ counter example, run the following command:
 
    {% for k, v in xc7_counter.items() %}
 
+      .. group-tab:: {{v['name']}}
 
-      .. group-tab:: {{v}}
+         .. code-block:: bash
 
-         .. include:: ../xc7/counter_test/README.rst
-            :code: bash
-            :start-after: {{k}}
-            {% if k != 'basys3' %}:end-before: .. {% endif %}
+            {{v['snippet']}}
+
 
    {% endfor %}
 

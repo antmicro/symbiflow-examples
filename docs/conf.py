@@ -31,12 +31,37 @@ extensions = [
     'sphinxcontrib.jinja',
 ]
 
+import os
+from collections import OrderedDict
+from tuttest import parse_rst, get_snippets
+
+def example_get_path(path):
+    return os.path.join(os.path.dirname(__file__), '..', path, 'README.rst')
+
+
+snippets = OrderedDict()
+examples_paths = (
+    'xc7/counter_test',
+)
+
+for p in examples_paths:
+    snippets.update(get_snippets(example_get_path(p)))
+
 jinja_contexts = {
     'xc7': {
         'xc7_counter': {
-            'a35t': 'Arty 35T',
-            'a100t': 'Arty 100T',
-            'basys3': 'Basys 3',
+            'a35t': {
+                'name': 'Arty 35T',
+                'snippet': snippets['example-counter-a35t'].text,
+            },
+            'a100t': {
+                'name': 'Arty 100T',
+                'snippet': snippets['example-counter-a100t'].text,
+            },
+            'basys3': {
+                'name': 'Basys 3',
+                'snippet': snippets['example-counter-basys3'].text,
+            },
         },
     },
 }
