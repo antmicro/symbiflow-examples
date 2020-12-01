@@ -68,13 +68,13 @@ counter example, run the following command:
 
    .. tabs::
 
-   {% for k, v in xc7_counter.items() %}
+   {% for k, v in counter_test.items() %}
 
       .. group-tab:: {{v['name']}}
 
          .. code-block:: bash
 
-            {{v['snippet']}}
+            {{v['code']}}
 
 
    {% endfor %}
@@ -97,14 +97,20 @@ PicoSoC demo
 This example features a picorv32 soft CPU and a SoC based on it. To build the
 picosoc example, run the following commands:
 
-.. tabs::
+.. jinja:: xc7
 
-   .. group-tab:: Basys 3
+   .. tabs::
 
-      .. code-block:: bash
-         :name: example-picosoc-basys3
+   {% for k, v in picosoc_demo.items() %}
 
-         TARGET="basys3" make -C picosoc_demo
+      .. group-tab:: {{v['name']}}
+
+         .. code-block:: bash
+
+            {{v['code']}}
+
+
+   {% endfor %}
 
 Now you can upload the design with:
 
