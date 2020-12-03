@@ -66,11 +66,14 @@ for family in families:
             snippets = get_snippets(example_readme)
 
             for snippet in snippets:
+                print(snippet)
                 variant = (snippet.split('-')[1])
                 entry[variant] = {
-                    'name': full_name_lut[variant],
-                    'code': snippets[snippet].text,
+                    'is_build': variant in full_name_lut,
+                    'name': full_name_lut.get(variant, variant),
+                    'code': snippets[snippet].text.split('\n'),
                 }
+
 
 print(jinja_contexts)
 

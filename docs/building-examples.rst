@@ -69,21 +69,28 @@ counter example, run the following command:
    .. tabs::
 
    {% for k, v in counter_test.items() %}
+   {% if v['is_build'] %}
 
       .. group-tab:: {{v['name']}}
 
          .. code-block:: bash
 
-            {{v['code']}}
+            {% for line in v['code'] %}
+               {{ line }}
+            {% endfor %}
 
-
+   {% endif %}
    {% endfor %}
 
 Now you can upload the design with:
 
-.. code-block:: bash
+.. jinja:: xc7
 
-   openocd -f ${INSTALL_DIR}/conda/share/openocd/scripts/board/digilent_arty.cfg -c "init; pld load 0 top.bit; exit"
+   .. code-block:: bash
+
+      {% for line in counter_test['upload']['code'] %}
+         {{ line }}
+      {% endfor %}
 
 
 The result should be as follows:
@@ -102,49 +109,50 @@ picosoc example, run the following commands:
    .. tabs::
 
    {% for k, v in picosoc_demo.items() %}
+   {% if v['is_build'] %}
 
       .. group-tab:: {{v['name']}}
 
          .. code-block:: bash
 
-            {{v['code']}}
+            {% for line in v['code'] %}
+               {{ line }}
+            {% endfor %}
 
-
+   {% endif %}
    {% endfor %}
 
 Now you can upload the design with:
 
-.. code-block:: bash
+.. jinja:: xc7
 
-   openocd -f ${INSTALL_DIR}/conda/share/openocd/scripts/board/digilent_arty.cfg -c "init; pld load 0 top.bit; exit"
+   .. code-block:: bash
+
+      {% for line in picosoc_demo['upload']['code'] %}
+         {{ line }}
+      {% endfor %}
 
 
 You should observe the following line in the OpenOCD output:
 
-.. code-block::
+.. jinja:: xc7
 
-   Info : JTAG tap: xc7.tap tap/device found: 0x0362d093 (mfg: 0x049 (Xilinx), part: 0x362d, ver: 0x0)
+   .. code-block::
+
+      {% for line in picosoc_demo['jtag']['code'] %}
+         {{ line }}
+      {% endfor %}
+
 
 The UART output should look as follows:
 
-.. code-block::
+.. jinja:: xc7
 
-   Terminal ready
-   Press ENTER to continue..
-   Press ENTER to continue..
-   Press ENTER to continue..
-   Press ENTER to continue..
+   .. code-block::
 
-    ____  _          ____         ____
-   |  _ \(_) ___ ___/ ___|  ___  / ___|
-   | |_) | |/ __/ _ \___ \ / _ \| |
-   |  __/| | (_| (_) |__) | (_) | |___
-   |_|   |_|\___\___/____/ \___/ \____|
-
-
-   [9] Run simplistic benchmark
-
-   Command>
+      {% for line in picosoc_demo['output']['code'] %}
+         {{ line }}
+      {% endfor %}
 
 .. note::
 
