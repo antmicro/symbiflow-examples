@@ -66,7 +66,6 @@ for family in families:
             snippets = get_snippets(example_readme)
 
             for snippet in snippets:
-                print(snippet)
                 variant = (snippet.split('-')[1])
                 entry[variant] = {
                     'is_build': variant in full_name_lut,
@@ -74,8 +73,6 @@ for family in families:
                     'code': snippets[snippet].text.split('\n'),
                 }
 
-
-print(jinja_contexts)
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

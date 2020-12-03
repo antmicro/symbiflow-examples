@@ -171,41 +171,46 @@ This example design features a Linix-capable SoC based around VexRiscv soft
 CPU. It also includes DDR and Ethernet controllers. To build the litex example,
 run the following commands:
 
-.. code-block:: bash
-   :name: example-litex-deps
+.. jinja:: xc7
 
-   wget https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py;
-   chmod +x litex_setup.py;
-   ./litex_setup.py init;
-   ./litex_setup.py install;
-   wget https://static.dev.sifive.com/dev-tools/riscv64-unknown-elf-gcc-8.1.0-2019.01.0-x86_64-linux-ubuntu14.tar.gz;
-   tar -xf riscv64-unknown-elf-gcc-8.1.0-2019.01.0-x86_64-linux-ubuntu14.tar.gz;
-   export PATH=$PATH:$PWD/riscv64-unknown-elf-gcc-8.1.0-2019.01.0-x86_64-linux-ubuntu14/bin/
-   #pushd litex/litex/boards/targets && ./arty.py --toolchain symbiflow --cpu-type vexriscv --build && popd
+   .. code-block:: bash
+
+      {% for line in linux_litex_demo['prereq']['code'] %}
+         {{ line }}
+      {% endfor %}
+
 
 To build the linux-litex-demo example, run the following commands:
 
-.. tabs::
+.. jinja:: xc7
 
-   .. group-tab:: Arty 35T
+   .. tabs::
 
-      .. code-block:: bash
-         :name: example-litex-a35t
+   {% for k, v in linux_litex_demo.items() %}
+   {% if v['is_build'] %}
 
-         TARGET="arty_35" make -C linux_litex_demo
+      .. group-tab:: {{v['name']}}
 
-   .. group-tab:: Arty 100T
+         .. code-block:: bash
 
-      .. code-block:: bash
-         :name: example-litex-a100t
+            {% for line in v['code'] %}
+               {{ line }}
+            {% endfor %}
 
-         TARGET="arty_100" make -C linux_litex_demo
+   {% endif %}
+   {% endfor %}
+
 
 Now you can upload the design with:
 
-.. code-block:: bash
+.. jinja:: xc7
 
-   openocd -f ${INSTALL_DIR}/conda/share/openocd/scripts/board/digilent_arty.cfg -c "init; pld load 0 top.bit; exit"
+   .. code-block:: bash
+
+      {% for line in linux_litex_demo['upload']['code'] %}
+         {{ line }}
+      {% endfor %}
+
 
 .. note::
 
@@ -246,7 +251,10 @@ Button counter
 This example design features a simple 4-bit countrer driving LEDs. To build the
 counter example, run the following command:
 
-.. code-block:: bash
-   :name: eos-s3-counter
+.. jinja:: eos-s3
 
-   make -C btn_counter
+   .. code-block:: bash
+
+      {% for line in btn_counter['eos_s3']['code'] %}
+         {{ line }}
+      {% endfor %}
