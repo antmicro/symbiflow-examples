@@ -75,7 +75,7 @@ counter example, run the following command:
 
          .. code-block:: bash
 
-            {% for line in v['code'] %}
+            {% for line in v['code'] -%}
                {{ line }}
             {% endfor %}
 
@@ -88,7 +88,7 @@ Now you can upload the design with:
 
    .. code-block:: bash
 
-      {% for line in counter_test['upload']['code'] %}
+      {% for line in counter_test['upload']['code'] -%}
          {{ line }}
       {% endfor %}
 
@@ -115,7 +115,7 @@ picosoc example, run the following commands:
 
          .. code-block:: bash
 
-            {% for line in v['code'] %}
+            {% for line in v['code'] -%}
                {{ line }}
             {% endfor %}
 
@@ -128,7 +128,7 @@ Now you can upload the design with:
 
    .. code-block:: bash
 
-      {% for line in picosoc_demo['upload']['code'] %}
+      {% for line in picosoc_demo['upload']['code'] -%}
          {{ line }}
       {% endfor %}
 
@@ -139,7 +139,7 @@ You should observe the following line in the OpenOCD output:
 
    .. code-block::
 
-      {% for line in picosoc_demo['jtag']['code'] %}
+      {% for line in picosoc_demo['jtag']['code'] -%}
          {{ line }}
       {% endfor %}
 
@@ -150,7 +150,7 @@ The UART output should look as follows:
 
    .. code-block::
 
-      {% for line in picosoc_demo['output']['code'] %}
+      {% for line in picosoc_demo['output']['code'] -%}
          {{ line }}
       {% endfor %}
 
@@ -175,7 +175,7 @@ run the following commands:
 
    .. code-block:: bash
 
-      {% for line in linux_litex_demo['prereq']['code'] %}
+      {% for line in linux_litex_demo['prereq']['code'] -%}
          {{ line }}
       {% endfor %}
 
@@ -193,7 +193,7 @@ To build the linux-litex-demo example, run the following commands:
 
          .. code-block:: bash
 
-            {% for line in v['code'] %}
+            {% for line in v['code'] -%}
                {{ line }}
             {% endfor %}
 
@@ -207,7 +207,7 @@ Now you can upload the design with:
 
    .. code-block:: bash
 
-      {% for line in linux_litex_demo['upload']['code'] %}
+      {% for line in linux_litex_demo['upload']['code'] -%}
          {{ line }}
       {% endfor %}
 
@@ -255,6 +255,6 @@ counter example, run the following command:
 
    .. code-block:: bash
 
-      {% for line in btn_counter['eos_s3']['code'] %}
+      {% for line in btn_counter['eos_s3']['code'] -%}
          {{ line }}
       {% endfor %}
