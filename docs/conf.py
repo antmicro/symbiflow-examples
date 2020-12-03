@@ -28,7 +28,51 @@ copyright = authors + u', 2020'
 # ones.
 extensions = [
     'sphinx_tabs.tabs',
+    'sphinxcontrib.jinja',
 ]
+
+import os
+from collections import OrderedDict
+from tuttest import get_snippets
+
+jinja_contexts = {}
+top_dir = os.path.join(os.path.dirname(__file__), '..')
+full_name_lut = {
+    'a35t': 'Arty 35T',
+    'a100t': 'Arty 100T',
+    'basys3': 'Basys 3',
+    'eos_s3': 'EOS S3',
+}
+
+# top-level examples directories
+families = ('xc7', 'eos-s3')
+for family in families:
+    jinja_contexts[family] = {}
+
+    # register examples
+    examples = os.scandir(os.path.join(top_dir, family))
+    for example in examples:
+        if example.is_dir():
+            entry = jinja_contexts[family][example.name] = {}
+
+            # get path to example's README
+            example_readme_path = [top_dir, family, example, 'README.rst']
+            example_readme = os.path.join(*example_readme_path)
+
+            # skip if file does not exist
+            if not os.path.isfile(example_readme):
+                continue
+
+            snippets = get_snippets(example_readme)
+
+            for snippet in snippets:
+                variant = (snippet.split('-')[1])
+                entry[variant] = {
+                    'is_build': variant in full_name_lut,
+                    'name': full_name_lut.get(variant, variant),
+                    'code': snippets[snippet].text.split('\n'),
+                }
+
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
