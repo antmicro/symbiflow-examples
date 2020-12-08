@@ -22,11 +22,11 @@ if [ "$fpga_fam" = "xc7" ]; then
         case $example in
             "counter")
                 # counter example
-                eval $(tuttest ../docs/building-examples.rst example-counter-a35t 2>&1)
+                eval $(tuttest counter_test/README.rst example-counter-a35t-group 2>&1)
                 make -C counter_test clean
-                eval $(tuttest ../docs/building-examples.rst example-counter-a100t 2>&1)
+                eval $(tuttest counter_test/README.rst example-counter-a100t-group 2>&1)
                 make -C counter_test clean
-                eval $(tuttest ../docs/building-examples.rst example-counter-basys3 2>&1)
+                eval $(tuttest counter_test/README.rst example-counter-basys3-group 2>&1)
                 make -C counter_test clean
                 ;;
             "picosoc")
@@ -42,5 +42,5 @@ if [ "$fpga_fam" = "xc7" ]; then
     done
 else
     # counter example
-    eval $(tuttest ../docs/building-examples.rst eos-s3-counter 2>&1)
+    eval $(tuttest btn_counter/README.rst eos-s3-counter 2>&1)
 fi;
