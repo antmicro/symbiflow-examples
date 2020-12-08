@@ -1,0 +1,14 @@
+name: symbiflow-docs
+channels:
+  - symbiflow
+  - conda-forge
+  - defaults
+dependencies:
+  - doxygen
+  - cmake
+  - pygobject
+  - cairo
+  - pango
+  - pip
+  - pip:
+    - -r file:requirements.txt

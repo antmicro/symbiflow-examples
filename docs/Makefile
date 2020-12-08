@@ -1,3 +1,18 @@
+ifdef USE_MAKE_ENV
+TOP_DIR := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
+REQUIREMENTS_FILE := requirements.txt
+ENVIRONMENT_FILE := environment.yml
+
+include ../third_party/make-env/conda.mk
+else
+$(info You are currently not using make-env. Use:)
+$(info )
+$(info export USE_MAKE_ENV=1)
+$(info )
+$(info to enable make-env support.)
+$(info )
+endif
+
 # Minimal makefile for Sphinx documentation
 #
 
@@ -9,12 +24,12 @@ SOURCEDIR     = .
 BUILDDIR      = _build
 
 # Put it first so that "make" without argument is like "make help".
-help:
+help: | $(CONDA_ENV_PYTHON)
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-.PHONY: help Makefile
+.PHONY: help
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
-%: Makefile
+%: | $(CONDA_ENV_PYTHON)
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
