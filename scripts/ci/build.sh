@@ -34,10 +34,10 @@ if [ "$fpga_fam" = "xc7" ]; then
                 ;;
             "litex")
                 # LiteX example
-                eval $(tuttest xc7/linux_litex_demo/README.rst example-litex-deps 2>&1)
-                eval $(tuttest xc7/linux_litex_demo/README.rst example-litex-a35t-group 2>&1)
+                eval $(tuttest linux_litex_demo/README.rst example-litex-deps 2>&1)
+                eval $(tuttest linux_litex_demo/README.rst example-litex-a35t-group 2>&1)
                 make -C linux_litex_demo
-                eval $(tuttest xc7/linux_litex_demo/README.rst example-litex-a100t-group 2>&1)
+                eval $(tuttest linux_litex_demo/README.rst example-litex-a100t-group 2>&1)
                 ;;
         esac
     done
