@@ -7,6 +7,7 @@ dependencies:
   - litex-hub::symbiflow-yosys-plugins=1.0.0_7_g59ff1e6_23_g3a95697_17_g00b887b_0194_g40efa51=20201120_145821
   - litex-hub::prjxray-tools=0.1_2697_g0f939808=20201120_145821
   - litex-hub::prjxray-db=0.0_0239_gd87c844=20201120_145821
+  - litex-hub::gcc-riscv64-elf-newlib=9.2.0=20201119_154229
   - make
   - lxml
   - simplejson
