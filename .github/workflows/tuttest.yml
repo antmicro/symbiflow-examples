@@ -55,6 +55,11 @@ jobs:
     - name: Prepare Repository
       uses: actions/checkout@v2
 
+    - name: Eoan APT fix-up
+      if: ${{matrix.os == 'ubuntu' && matrix.os-version == 'eoan'}}
+      run: |
+        sed -i 's/archive/old-releases/g' /etc/apt/sources.list
+
     - name: Set Up Python
       if: ${{matrix.os == 'ubuntu'}}
       run: |
@@ -77,11 +82,6 @@ jobs:
         yum -y install git 
         yum -y install wget
         yum -y groupinstall 'Development Tools'
-
-    - name: Eoan APT fix-up
-      if: ${{matrix.os == 'ubuntu' && matrix.os-version == 'eoan'}}
-      run: |
-        sed -i 's/archive/old-releases/g' /etc/apt/sources.list
 
     - name: Install Prerequisites
       run: |
