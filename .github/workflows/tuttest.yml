@@ -49,6 +49,8 @@ jobs:
       INSTALL_DIR: "/root/opt/symbiflow"
       DEBIAN_FRONTEND: "noninteractive"
 
+    container: ${{matrix.os}}:${{matrix.tag}}
+
     steps:
     - name: Prepare Repository
       uses: actions/checkout@v2
