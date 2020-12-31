@@ -58,18 +58,25 @@ jobs:
     - name: Set Up Python
       if: ${{matrix.os == 'ubuntu'}}
       run: |
-        apt -qqy update && apt -qqy install git wget python3 python3-pip
+        apt -qqy update && apt -qqy install git wget python3 python3-pip build-essential
 
     - name: Set Up Python
       if: ${{matrix.os == 'centos' && matrix.os-version == '7'}}
       run: |
-        yum -y install centos-release-scl rh-python36 git wget
+        yum -y install centos-release-scl 
+        yum -y install rh-python36 
+        yum -y install git 
+        yum -y install wget
+        yum -y groupinstall 'Development Tools'
         cp /opt/rh/rh-python36/root/usr/bin/* /usr/bin
 
     - name: Set Up Python
       if: ${{matrix.os == 'centos' && matrix.os-version == '8'}}
       run: |
-        yum -y install python3 git wget
+        yum -y install python3 
+        yum -y install git 
+        yum -y install wget
+        yum -y groupinstall 'Development Tools'
 
     - name: Install Prerequisites
       run: |
