@@ -59,6 +59,7 @@ jobs:
       if: ${{matrix.os == 'ubuntu' && matrix.os-version == 'eoan'}}
       run: |
         sed -i 's/archive/old-releases/g' /etc/apt/sources.list
+        sed -i '/security/d' /etc/apt/sources.list
 
     - name: Set Up Python
       if: ${{matrix.os == 'ubuntu'}}
