@@ -96,14 +96,14 @@ jobs:
     - name: (tuttest) Install SymbiFlow Toolchain
       run: |
         source .github/scripts/tuttest_exec.sh
-        tuttest_exec README.rst install-req-${{matrix.os}}
-        tuttest_exec README.rst wget-conda
-        tuttest_exec ${{matrix.toolchain}}/README.rst ${{matrix.toolchain}}-setup-toolchain
+        tuttest_exec README.rst install-req-${{matrix.os}} | bash -
+        tuttest_exec README.rst wget-conda | bash -
+        tuttest_exec ${{matrix.toolchain}}/README.rst ${{matrix.toolchain}}-setup-toolchain | bash -
 
     - name: (tuttest) Test Example
       run: |
         source .github/scripts/tuttest_exec.sh
-        tuttest_exec ${{matrix.toolchain}}/README.rst ${{matrix.toolchain}}-prepare-env,${{matrix.example}}
+        tuttest_exec ${{matrix.toolchain}}/README.rst ${{matrix.toolchain}}-prepare-env,${{matrix.example}} | bash -
 
     - uses: actions/upload-artifact@v2
       with:
