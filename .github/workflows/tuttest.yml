@@ -49,7 +49,7 @@ jobs:
       INSTALL_DIR: "/root/opt/symbiflow"
       DEBIAN_FRONTEND: "noninteractive"
 
-    container: ${{matrix.os}}:${{matrix.tag}}
+    container: ${{matrix.os}}:${{matrix.os-version}}
 
     steps:
     - name: Prepare Repository
