@@ -54,19 +54,19 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Set Up Python
-      if: ${{matrix.os == "ubuntu"}}
+      if: ${{matrix.os == 'ubuntu'}}
       run: |
         apt -qqy update && apt install git python3 python3-pip
 
     - name: Set Up Python
-      if: ${{matrix.os == "centos" && matrix.os-version == "7"}}
+      if: ${{matrix.os == 'centos' && matrix.os-version == '7'}}
       run: |
         yum -y install centos-release-scl
         yum -y install rh-python36
         cp /opt/rh/rh-python36/root/usr/bin/* /usr/bin
 
     - name: Set Up Python
-      if: ${{matrix.os == "centos" && matrix.os-version == "8"}}
+      if: ${{matrix.os == 'centos' && matrix.os-version == '8'}}
       run: |
         yum -y install python3
 
