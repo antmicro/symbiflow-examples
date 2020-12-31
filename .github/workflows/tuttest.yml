@@ -78,6 +78,11 @@ jobs:
         yum -y install wget
         yum -y groupinstall 'Development Tools'
 
+    - name: Eoan APT fix-up
+      if: ${{matrix.os == 'ubuntu' && matrix.os-version == 'eoan'}}
+      run: |
+        sed -i 's/archive/old-releases/g' /etc/apt/sources.list
+
     - name: Install Prerequisites
       run: |
         pip3 install git+https://github.com/antmicro/tuttest#egg=tuttest dataclasses
