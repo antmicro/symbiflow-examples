@@ -55,7 +55,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set Up Python
-        if: ${{matrix.os == 'ubuntu'}}
+        if: ${{matrix.os == 'ubuntu' || matrix.os == 'debian'}}
         run: |
           apt -qqy update && apt -qqy install git wget python3 python3-pip build-essential locales
           locale-gen $LANG
@@ -83,7 +83,7 @@ jobs:
           pip3 install git+https://github.com/antmicro/tuttest#egg=tuttest
 
       - name: Copy 9p
-        run: mkdir -p /work && cp -r /9p /work
+        run: cp -r /9p /work
 
       - name: Install SymbiFlow toolchain
         run: cd /work && bash .github/scripts/install-toolchain.sh ${{matrix.fpga-fam}} ${{matrix.os}} | ${IN_DOCKER_EXEC} "$(cat /dev/stdin)"
