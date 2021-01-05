@@ -91,10 +91,13 @@ jobs:
 
     - name: Test Main README.rst
       run: |
+        cp -r /9p /work
+        cd /work
         rm README.rst && make README.rst && .github/scripts/git-check.sh
 
     - name: (tuttest) Install SymbiFlow Toolchain
       run: |
+        cd /work
         source .github/scripts/tuttest_exec.sh
         tuttest_exec README.rst install-req-${{matrix.os}} | bash -
         tuttest_exec README.rst wget-conda | bash -
@@ -102,6 +105,7 @@ jobs:
 
     - name: (tuttest) Test Example
       run: |
+        cd /work
         source .github/scripts/tuttest_exec.sh
         tuttest_exec ${{matrix.toolchain}}/README.rst ${{matrix.toolchain}}-prepare-env,${{matrix.example}} | bash -
 
