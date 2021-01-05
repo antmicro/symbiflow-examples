@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   test-sphinx-docs:
-    runs-on: ubuntu-18.04
+    runs-on: [self-hosted, Linux, X64]
     strategy:
       fail-fast: false
       matrix:
@@ -46,31 +46,50 @@ jobs:
           - {fpga-fam: "xc7",    os: "debian", os-version: "sid",      example: "litex_linux"}
     env:
       LANG: "en_US.UTF-8"
-      DOCKER_NAME: test
-      IN_DOCKER_EXEC: "docker exec -t test bash -e -c"
+      DEBIAN_FRONTEND: "noninteractive"
+
+    container: ${{matrix.os}}:${{matrix.os-version}}
 
     steps:
       - name: Setup repository
         uses: actions/checkout@v2
 
       - name: Set Up Python
-        uses: actions/setup-python@v2
-
-      - name: Setup Docker
+        if: ${{matrix.os == 'ubuntu'}}
         run: |
-            docker create --name $DOCKER_NAME -v $PWD:$PWD --workdir $PWD --tty ${{matrix.os}}:${{matrix.os-version}}
-            docker start $DOCKER_NAME
+          apt -qqy update && apt -qqy install git wget python3 python3-pip build-essential locales
+          locale-gen $LANG
+
+      - name: Set Up Python
+        if: ${{matrix.os == 'centos' && matrix.os-version == '7'}}
+        run: |
+          yum -y install centos-release-scl 
+          yum -y install rh-python36 
+          yum -y install git 
+          yum -y install wget
+          yum -y groupinstall 'Development Tools'
+          cp /opt/rh/rh-python36/root/usr/bin/* /usr/bin
+
+      - name: Set Up Python
+        if: ${{matrix.os == 'centos' && matrix.os-version == '8'}}
+        run: |
+          yum -y install python3 
+          yum -y install git 
+          yum -y install wget
+          yum -y groupinstall 'Development Tools'
 
       - name: Install tuttest
         run: |
-            sudo locale-gen $LANG
-            pip3 install git+https://github.com/antmicro/tuttest#egg=tuttest
+          pip3 install git+https://github.com/antmicro/tuttest#egg=tuttest
+
+      - name: Copy 9p
+        run: mkdir -p /work && cp -r /9p /work
 
       - name: Install SymbiFlow toolchain
-        run: bash .github/scripts/install-toolchain.sh ${{matrix.fpga-fam}} ${{matrix.os}} | ${IN_DOCKER_EXEC} "$(cat /dev/stdin)"
+        run: cd /work && bash .github/scripts/install-toolchain.sh ${{matrix.fpga-fam}} ${{matrix.os}} | ${IN_DOCKER_EXEC} "$(cat /dev/stdin)"
 
       - name: Build examples
-        run: bash .github/scripts/build-examples.sh ${{matrix.fpga-fam}} ${{matrix.example}} | ${IN_DOCKER_EXEC} "$(cat /dev/stdin)"
+        run: cd /work && bash .github/scripts/build-examples.sh ${{matrix.fpga-fam}} ${{matrix.example}} | ${IN_DOCKER_EXEC} "$(cat /dev/stdin)"
 
       - uses: actions/upload-artifact@v2
         with:
