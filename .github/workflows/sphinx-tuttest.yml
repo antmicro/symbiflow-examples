@@ -86,10 +86,10 @@ jobs:
         run: cp -r /9p /work
 
       - name: Install SymbiFlow toolchain
-        run: cd /work && bash .github/scripts/install-toolchain.sh ${{matrix.fpga-fam}} ${{matrix.os}} | ${IN_DOCKER_EXEC} "$(cat /dev/stdin)"
+        run: cd /work && bash .github/scripts/install-toolchain.sh ${{matrix.fpga-fam}} ${{matrix.os}} | bash -
 
       - name: Build examples
-        run: cd /work && bash .github/scripts/build-examples.sh ${{matrix.fpga-fam}} ${{matrix.example}} | ${IN_DOCKER_EXEC} "$(cat /dev/stdin)"
+        run: cd /work && bash .github/scripts/build-examples.sh ${{matrix.fpga-fam}} ${{matrix.example}} | bash -
 
       - uses: actions/upload-artifact@v2
         with:
