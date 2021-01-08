@@ -53,7 +53,15 @@ jobs:
     steps:
       - name: Setup repository
         uses: actions/checkout@v2
-
+      
+      - name: Update Python (Xenial)
+        if: ${{matrix.os == 'ubuntu' && matrix.os-version == 'xenial'}}
+        run: |
+          apt -qqy update && apt -qqy install software-properties-common
+          add-apt-repository -y ppa:deadsnakes/ppa
+          apt -qqy update && apt -qqy install python3.7
+          update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 1
+          
       - name: Set Up Python
         if: ${{matrix.os == 'ubuntu' || matrix.os == 'debian'}}
         run: |
@@ -68,7 +76,7 @@ jobs:
           yum -y install git 
           yum -y install wget
           yum -y groupinstall 'Development Tools'
-          cp /opt/rh/rh-python36/root/usr/bin/* /usr/bin
+          echo "/opt/rh/rh-python36/root/usr/bin" >> $GITHUB_PATH
 
       - name: Set Up Python
         if: ${{matrix.os == 'centos' && matrix.os-version == '8'}}
