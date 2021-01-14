@@ -54,42 +54,19 @@ jobs:
     steps:
       - name: Setup repository
         uses: actions/checkout@v2
-      
-      - name: Update Python (Xenial)
-        if: ${{matrix.os == 'ubuntu' && matrix.os-version == 'xenial'}}
-        run: |
-          apt -qqy update && apt -qqy install software-properties-common
-          add-apt-repository -y ppa:deadsnakes/ppa
-          apt -qqy update && apt -qqy install python3.7
-          update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 1
-          
-      - name: Set Up Python
+
+      - name: Install utils
         if: ${{matrix.os == 'ubuntu' || matrix.os == 'debian'}}
-        run: |
-          apt -qqy update && apt -qqy install git wget python3 python3-pip build-essential locales
-          locale-gen $LANG
+        run: apt -qqy update && apt -qqy install wget locales && locale-gen $LANG
 
-      - name: Set Up Python
-        if: ${{matrix.os == 'centos' && matrix.os-version == '7'}}
-        run: |
-          yum -y install centos-release-scl 
-          yum -y install rh-python36 
-          yum -y install git 
-          yum -y install wget
-          yum -y groupinstall 'Development Tools'
-          echo "/opt/rh/rh-python36/root/usr/bin" >> $GITHUB_PATH
-
-      - name: Set Up Python
-        if: ${{matrix.os == 'centos' && matrix.os-version == '8'}}
-        run: |
-          yum -y install python3 
-          yum -y install git 
-          yum -y install wget
-          yum -y groupinstall 'Development Tools'
+      - name: Install utils
+        if: ${{matrix.os == 'centos'}}
+        run: yum -y install wget
 
       - name: Install tuttest
         run: |
-          pip3 install git+https://github.com/antmicro/tuttest#egg=tuttest
+          wget https://github.com/antmicro/tuttest/releases/download/0.1.1/tuttest -O /usr/bin/tuttest
+          chmod a+rx /usr/bin/tuttest
 
       - name: Install SymbiFlow toolchain
         run: bash .github/scripts/install-toolchain.sh ${{matrix.fpga-fam}} ${{matrix.os}} | ${BASH_CMD}
