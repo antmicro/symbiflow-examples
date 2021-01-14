@@ -17,8 +17,18 @@ jobs:
           - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "xenial",   example: "counter", n: 6}
           - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "xenial",   example: "counter", n: 7}
           - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "xenial",   example: "counter", n: 8}
-          - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "xenial",   example: "counter", n": 9}
+          - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "xenial",   example: "counter", n: 9}
           - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "xenial",   example: "counter", n: 10}
+          - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "xenial",   example: "counter", n: 11}
+          - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "xenial",   example: "counter", n: 12}
+          - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "xenial",   example: "counter", n: 13}
+          - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "xenial",   example: "counter", n: 14}
+          - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "xenial",   example: "counter", n: 15}
+          - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "xenial",   example: "counter", n: 16}
+          - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "xenial",   example: "counter", n: 17}
+          - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "xenial",   example: "counter", n: 18}
+          - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "xenial",   example: "counter", n: 19}
+          - {fpga-fam: "eos-s3", os: "ubuntu", os-version: "xenial",   example: "counter", n: 20}
     env:
       LANG: "en_US.UTF-8"
       DEBIAN_FRONTEND: "noninteractive"
