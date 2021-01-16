@@ -7,18 +7,21 @@ picosoc example, run the following commands:
 .. code-block:: bash
    :name: example-picosoc-a35t-group
 
+   export VPR_NUM_WORKERS=$(nproc)
    TARGET="arty_35" make -C picosoc_demo
 
 
 .. code-block:: bash
    :name: example-picosoc-a100t-group
 
+   export VPR_NUM_WORKERS=$(nproc)
    TARGET="arty_100" make -C picosoc_demo
 
 
 .. code-block:: bash
    :name: example-picosoc-basys3-group
 
+   export VPR_NUM_WORKERS=$(nproc)
    TARGET="basys3" make -C picosoc_demo
 
 Now you can upload the design with:

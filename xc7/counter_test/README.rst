@@ -7,30 +7,35 @@ counter example, depending on your hardware, run:
 .. code-block:: bash
    :name: example-counter-a35t-group
 
+   export VPR_NUM_WORKERS=$(nproc)
    TARGET="arty_35" make -C counter_test
 
 
 .. code-block:: bash
    :name: example-counter-a100t-group
 
+   export VPR_NUM_WORKERS=$(nproc)
    TARGET="arty_100" make -C counter_test
 
 
 .. code-block:: bash
    :name: example-counter-basys3-group
 
+   export VPR_NUM_WORKERS=$(nproc)
    TARGET="basys3" make -C counter_test
 
 
 .. code-block:: bash
    :name: example-counter-nexys_video-group
 
+   export VPR_NUM_WORKERS=$(nproc)
    TARGET="nexys_video" make -C counter_test
 
 
 .. code-block:: bash
    :name: example-counter-zybo-group
 
+   export VPR_NUM_WORKERS=$(nproc)
    TARGET="zybo" make -C counter_test
 
 
