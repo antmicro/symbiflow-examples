@@ -66,6 +66,7 @@ jobs:
         run: |
           wget https://github.com/antmicro/tuttest/releases/download/v0.2-beta/tuttest -O /usr/bin/tuttest
           chmod a+rx /usr/bin/tuttest
+          echo Done 1>&2
 
       - name: Install SymbiFlow toolchain
         run: bash .github/scripts/install-toolchain.sh ${{matrix.fpga-fam}} ${{matrix.os}}
